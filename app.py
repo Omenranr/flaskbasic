@@ -20,7 +20,7 @@ def forecast(product):
     output_path = "./forecasts/"
     prepared_data = "EMPTY"
     trained_models = "EMPTY"
-    wmlActive = bool(request.args.get('wml'), True)
+    wmlActive = bool(request.args.get('wml', True))
     try:
         print("Preparing Data...")
         prepared_data = prepare_data(product, data_path)
