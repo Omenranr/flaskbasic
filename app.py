@@ -20,7 +20,7 @@ def forecast(product):
     output_path = "./forecasts/"
     prepared_data = "EMPTY"
     trained_models = "EMPTY"
-    compatibility = "wml"
+    wmlActive = bool(request.args.get('wml'), True)
     try:
         print("Preparing Data...")
         prepared_data = prepare_data(product, data_path)
@@ -35,7 +35,7 @@ def forecast(product):
         print("Saving results...")
         IA_TO_PAL_VOLUME, IA_TO_PAL_VOLUME_MAX, IA_TO_PAL_VOLUME_MIN, coefs_df = save_results(output_path, predictions, coefs, product, exog_vars, exog_cols)
         print("Returning results...")
-        if compatibility == "wml":
+        if wmlActive:
             return {
                 "values": "23618.026074508816,23791.67804542294,23860.984103128325,23991.93496957897,24086.4677116548,24202.515319458584,2837.517784580972,3065.9195997998195,3745.516942754864,4059.8873458016715,4487.627145984945,4801.637850588014,18056.593411238227,29179.458737779405,17782.58605031984,29800.770040526044,16519.90579184422,31202.06241441243,16034.701990517784,31949.16794864016,15290.880129480038,32882.055293829566,14791.478065501758,33613.55257341541", 
                 "errors": "errors"
